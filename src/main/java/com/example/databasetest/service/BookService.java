@@ -2,6 +2,7 @@ package com.example.databasetest.service;
 
 import com.example.databasetest.entities.Book;
 import com.example.databasetest.reposetories.BookRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,16 +23,19 @@ public class BookService {
         return ResponseEntity.ok(bookRepository.getBooksById(id));
     }
 
+    @Transactional
     public ResponseEntity<String> createBook(String newBook) {
         bookRepository.createBook(newBook);
         return ResponseEntity.ok("adding success");
     }
 
+    @Transactional
     public ResponseEntity<String> updateBook(Long id,Book book) {
         bookRepository.updateBook(id,book.getName());
         return ResponseEntity.ok("updating success");
     }
 
+    @Transactional
     public ResponseEntity<String> deleteBook(Long id) {
         bookRepository.deleteBook(id);
         return ResponseEntity.ok("updating success");
