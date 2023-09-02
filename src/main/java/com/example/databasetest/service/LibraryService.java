@@ -1,10 +1,9 @@
 package com.example.databasetest.service;
 
+import com.example.databasetest.entities.Author;
 import com.example.databasetest.entities.Book;
+import com.example.databasetest.reposetories.AuthorRepository;
 import com.example.databasetest.reposetories.BookRepository;
-import org.apache.juli.logging.Log;
-import org.apache.juli.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +11,20 @@ import java.util.List;
 
 @Service
 public class LibraryService {
-    private static Log log = LogFactory.getLog(Book.class);
 
-    @Autowired
-    private BookRepository bookRepository;
+    private final BookRepository bookRepository;
+    private final AuthorRepository authorRepository;
+
+    public LibraryService(BookRepository bookRepository, AuthorRepository authorRepository) {
+        this.bookRepository = bookRepository;
+        this.authorRepository = authorRepository;
+    }
 
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
+    }
+    public List<Author> getAllAuthors() {
+        return authorRepository.findAll();
     }
 
     public Book getBookById(long id){
