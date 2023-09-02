@@ -18,7 +18,5 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-//    @Column(name = "book_name", nullable = false)
-//    @Basic(fetch = FetchType.LAZY)
     private String name;
 }
